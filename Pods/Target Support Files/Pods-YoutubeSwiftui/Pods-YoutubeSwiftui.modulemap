@@ -1,0 +1,6 @@
+framework module Pods_YoutubeSwiftui {
+  umbrella header "Pods-YoutubeSwiftui-umbrella.h"
+
+  export *
+  module * { export * }
+}
