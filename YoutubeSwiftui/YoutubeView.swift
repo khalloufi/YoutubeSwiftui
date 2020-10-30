@@ -15,12 +15,13 @@ struct YoutubeView: UIViewRepresentable{
     var videoId: String
     @Binding var action: String
     let playerVars = ["playsinline":1]
-    /*func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }*/
+    let playerView = YTPlayerView()
+    func makeCoordinator() -> Coordinator {
+        Coordinator(playerView)
+    }
     
     func makeUIView(context: Context) -> YTPlayerView {
-       let playerView: YTPlayerView = YTPlayerView()
+        playerView.delegate = context.coordinator
         playerView.load(withVideoId: videoId, playerVars: playerVars)
        return playerView
     }
@@ -33,18 +34,16 @@ struct YoutubeView: UIViewRepresentable{
             }
         }
     }
-    /*class Coordinator : NSObject, YTPlayerViewDelegate {
+    class Coordinator : NSObject, YTPlayerViewDelegate {
         var parent: YTPlayerView
         var valueSubscriber: AnyCancellable? = nil
-        
-        init(_ playerView: YTPlayerView) {
-            self.parent = playerView
+        init(_ playerView:YTPlayerView) {
+           parent = playerView
         }
-        
         deinit {
             valueSubscriber?.cancel()
         }
-        private func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
+        func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
             print(state)
             switch state {
             case .playing:
@@ -53,6 +52,5 @@ struct YoutubeView: UIViewRepresentable{
                 print("default")
             }
         }
-        
-    }*/
+    }
 }
