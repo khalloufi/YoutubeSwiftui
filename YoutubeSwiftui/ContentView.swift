@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var action:String = "Play"
+    @State var action:String = ""
     var body: some View {
         VStack{
             Text("Title")
